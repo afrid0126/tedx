@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TEDx GPREC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --tedx-red: #eb0028;
+      --glass-bg: rgba(18, 18, 18, 0.52);
+      --glass-blur: blur(6px);
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      padding-top: 100px; /* for fixed navbar */
+    }
+
+    /* ======================== NAVBAR ======================== */
+    .nav-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 70px;
+      padding: 0 30px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 16px;
+      z-index: 1500;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #fff;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 9px; }
+    .hamburger span:nth-child(3) { top: 18px; }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 10px;
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 10px;
+    }
+
+    /* ======================== OVERLAY MENU ======================== */
+    .overlay {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      display: none;
+      z-index: 1400;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      padding: 0 8vw;
+      gap: 20px;
+    }
+
+    .overlay-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .overlay-left ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .overlay-left li {
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.4s ease forwards;
+    }
+
+    .overlay-left li:nth-child(1) { animation-delay: 0.1s; }
+    .overlay-left li:nth-child(2) { animation-delay: 0.2s; }
+    .overlay-left li:nth-child(3) { animation-delay: 0.3s; }
+    .overlay-left li:nth-child(4) { animation-delay: 0.4s; }
+    .overlay-left li:nth-child(5) { animation-delay: 0.5s; }
+    .overlay-left li:nth-child(6) { animation-delay: 0.6s; }
+    .overlay-left li:nth-child(7) { animation-delay: 0.7s; }
+    .overlay-left li:nth-child(8) { animation-delay: 0.8s; }
+
+    .overlay-left a {
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .overlay-left a:hover {
+      transform: scale(1.05);
+    }
+
+    .overlay-left a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--tedx-red);
+      transition: width 0.3s ease-in-out;
+    }
+
+    .overlay-left a:hover::after {
+      width: 100%;
+    }
+
+    .overlay-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay-badge {
+      max-width: 90%;
+      max-height: 70%;
+      animation: fadeIn 1s ease forwards;
+      filter: drop-shadow(0 0 20px rgba(28, 19, 19, 0.2));
+      margin-bottom: 6px;
+    }
+
+    .badge-wrapper {
+      text-align: center;
+    }
+
+    .badge-tagline {
+      font-size: 1rem;
+      margin-top: 4px;
+      color: white;
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      animation: fadeIn 1.2s ease-in-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ======================== ABOUT SECTION ======================== */
+    .about-block {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.8s ease;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      background-color: #1a1a1a;
+      text-align: justify;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+    }
+
+    .about-block.animate-in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .about-block.animate-out {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .separator {
+      width: 50px;
+      height: 4px;
+      background-color: red;
+      margin-bottom: 1.2rem;
+      border-radius: 4px;
+    }
+
+    .highlight { color: #ff5555; font-weight: bold; }
+    .highlight-red { color: red; font-weight: bold; }
+    .red-text { color: red; font-weight: bold; }
+
+    /* ======================== RESPONSIVE ======================== */
+    @media screen and (max-width: 768px) {
+      .nav-container {
+        width: 95%;
+        border-radius: 12px;
+        padding: 0 20px;
+      }
+
+      .overlay-content {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .overlay-left, .overlay-right {
+        width: 100%;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .overlay-left a {
+        font-size: 1.5rem;
+      }
+
+      .overlay-badge {
+        max-width: 65%;
+      }
+
+      .badge-tagline {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="nav-container">
+    <img src="media/photos/logo-white.png" alt="TEDxGPREC Logo" class="logo" />
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Overlay Menu -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <div class="overlay-left">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="performers.html">Performers</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="overlay-right">
+        <div class="badge-wrapper">
+          <img src="media/photos/badge1.png" alt="TEDxGPREC Badge" class="overlay-badge" />
+          <p class="badge-tagline">IDEAS CHANGE EVERYTHING</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-block">
+      <h2 class="section-title">About <span class="red-text">TED</span></h2>
+      <div class="separator"></div>
+      <p>
+        <span class="highlight-red">TED</span> (Technology, Entertainment, Design) is a non-profit media organization that posts international talks online for free distribution under the slogan <span class="highlight">"Ideas change everything"</span>.
+        <br><br>
+        TED covers almost all topics – from science to business to global issues – in more than 100 languages. These short, idea-focused talks foster learning, inspiration, and conversation.
+      </p>
+    </div>
+    <div class="about-block">
+      <h2 class="section-title">About <span class="red-text">TEDx</span></h2>
+      <div class="separator"></div>
+      <p>
+        In the spirit of <span class="highlight">"ideas change everything"</span>, <span class="highlight-red">TEDx</span> events are independently organized local gatherings where TED-like talks and performances are shared. Each <span class="highlight-red">TEDx</span> event is unique but follows a common format and vision.
+        <br><br>
+        Organizers aim to inspire, not for profit or politics, but for sharing transformative ideas with their communities.
+      </p>
+    </div>
+    <div class="about-block">
+      <h2 class="section-title">About <span class="red-text">TEDxGPREC</span></h2>
+      <div class="separator"></div>
+      <p>
+        <span class="highlight-red">TEDxGPREC</span> is an independently organized TEDx event held at GPREC, designed to bring bold ideas to light. Through carefully selected speakers and engaging sessions, we aim to inspire our audience and spark change.
+        <br><br>
+        Our talks blend Indian culture with globally relevant topics under the TED format, creating an experience that’s both unique and impactful.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu(icon) {
+      icon.classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("open");
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.hamburger').classList.remove('active');
+        document.getElementById('overlay').classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const target = entry.target;
+        if (entry.isIntersecting) {
+          target.classList.add("animate-in");
+          target.classList.remove("animate-out");
+        } else {
+          target.classList.remove("animate-in");
+          target.classList.add("animate-out");
+        }
+      });
+    }, {
+      threshold: 0.1,
+    });
+
+    document.querySelectorAll(".about-block").forEach(block => {
+      observer.observe(block);
+    });
+  </script>
+</body>
+</html>

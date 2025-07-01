@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TEDx GPREC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --tedx-red: #eb0028;
+      --glass-bg: rgba(18, 18, 18, 0.52);
+      --glass-blur: blur(6px);
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      padding-top: 100px; /* for fixed navbar */
+    }
+
+    /* ========== NAVBAR ========== */
+    .nav-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 70px;
+      padding: 0 30px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 16px;
+      z-index: 1500;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #fff;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 9px; }
+    .hamburger span:nth-child(3) { top: 18px; }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 10px;
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 10px;
+    }
+
+    /* ========== OVERLAY ========== */
+    .overlay {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      display: none;
+      z-index: 1400;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      padding: 0 8vw;
+      gap: 20px;
+    }
+
+    .overlay-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .overlay-left ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .overlay-left li {
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.4s ease forwards;
+    }
+
+    .overlay-left li:nth-child(1) { animation-delay: 0.1s; }
+    .overlay-left li:nth-child(2) { animation-delay: 0.2s; }
+    .overlay-left li:nth-child(3) { animation-delay: 0.3s; }
+    .overlay-left li:nth-child(4) { animation-delay: 0.4s; }
+    .overlay-left li:nth-child(5) { animation-delay: 0.5s; }
+    .overlay-left li:nth-child(6) { animation-delay: 0.6s; }
+    .overlay-left li:nth-child(7) { animation-delay: 0.7s; }
+    .overlay-left li:nth-child(8) { animation-delay: 0.8s; }
+
+    .overlay-left a {
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .overlay-left a:hover {
+      transform: scale(1.05);
+    }
+
+    .overlay-left a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--tedx-red);
+      transition: width 0.3s ease-in-out;
+    }
+
+    .overlay-left a:hover::after {
+      width: 100%;
+    }
+
+    .overlay-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay-badge {
+      max-width: 90%;
+      max-height: 70%;
+      animation: fadeIn 1s ease forwards;
+      filter: drop-shadow(0 0 20px rgba(28, 19, 19, 0.2));
+      margin-bottom: 6px;
+    }
+
+    .badge-wrapper {
+      text-align: center;
+    }
+
+    .badge-tagline {
+      font-size: 1rem;
+      margin-top: 4px;
+      color: white;
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      animation: fadeIn 1.2s ease-in-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-container {
+        width: 95%;
+        padding: 0 20px;
+      }
+
+      .overlay-content {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .overlay-left, .overlay-right {
+        width: 100%;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .overlay-left a {
+        font-size: 1.5rem;
+      }
+
+      .overlay-badge {
+        max-width: 65%;
+      }
+
+      .badge-tagline {
+        font-size: 0.8rem;
+      }
+
+    }
+    
+
+  
+  .section-title {
+      text-align: center;
+      font-size: 40px;
+      color: #ff1a1a;
+      padding-top: 60px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 150px;
+      height: 3px;
+      background: #ff1a1a;
+      margin: 15px auto 40px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      padding: 0 40px 80px;
+      justify-items: center;
+    }
+
+    .team-member {
+      position: relative;
+      width: 220px;
+      height: 280px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(255, 26, 26, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 0 24px rgba(255, 26, 26, 0.6);
+    }
+
+    .team-member img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+
+    .team-member:hover img {
+      filter: grayscale(0%);
+    }
+
+    .team-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: rgba(255, 26, 26, 0.9);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      transition: bottom 0.4s ease;
+    }
+
+    .team-member:hover .team-overlay {
+      bottom: 0;
+    }
+
+    .team-overlay h3 {
+      margin: 5px 0 0;
+      font-size: 18px;
+    }
+
+    .team-overlay p {
+      margin: 0;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .role-heading {
+      font-size: 24px;
+      color: #ff1a1a;
+      margin: 40px 60px 10px;
+      border-left: 5px solid #ff1a1a;
+      padding-left: 10px;
+    }
+
+    #year-filters {
+      text-align: center;
+      margin: 20px 0 40px;
+    }
+
+    .year-btn {
+      background-color: transparent;
+      border: 2px solid #ff1a1a;
+      color: #ff1a1a;
+      font-weight: 600;
+      padding: 8px 20px;
+      margin: 0 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 18px;
+    }
+
+    .year-btn.active,
+    .year-btn:hover {
+      background-color: #ff1a1a;
+      color: black;
+      border-color: #ff1a1a;
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <div class="nav-container">
+    <img src="media/photos/logo-white.png" alt="TEDx Logo" class="logo">
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- ✅ OVERLAY MENU -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <div class="overlay-left">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="performers.html">Performers</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="overlay-right">
+        <div class="badge-wrapper">
+          <img src="media/photos/badge1.png" alt="TEDxGPREC Badge" class="overlay-badge" />
+          <p class="badge-tagline">IDEAS CHANGE EVERYTHING</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="year-filters">
+    <button class="year-btn active" data-year="2025">2025</button>
+    <button class="year-btn" data-year="2024">2024</button>
+    <button class="year-btn" data-year="2023">2023</button>
+  </div>
+
+
+  <div id="team-sections"></div>
+
+  <script>
+    function toggleMenu(icon) {
+      icon.classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("open");
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.hamburger').classList.remove('active');
+        document.getElementById('overlay').classList.remove('open');
+      });
+    });
+
+     const teamData1=[];
+const teamData2 = [
+  {
+    section: "Organizers",
+    members: [
+      {
+        name: "M Gandhi Prakash",
+        role: "Organiser",
+        image: "2024/Organisers/gandhi.jpg",
+      },
+      {
+        name: "T Chethana Choudary",
+        role: "Co-Organizer",
+        image: "2024/Organisers/chethana.jpg",
+      },
+      {
+        name: "G Lalith Aditya",
+        role: "Executive Director",
+        image: "2024/Organisers/Aditya.jpg",
+      },
+    ],
+  },
+  {
+    section: "Design Team",
+    members: [
+      {
+        name: "K S Gokul",
+        role: "Director",
+        image: "2024/Designers/gokul.jpg",
+      },
+      {
+        name: "Jagadeesh Nallabothula",
+        role: "Co-Director",
+        image: "2024/Designers/jagadesh.jpg",
+      },
+      {
+        name: "Buchupalli Pujitha",
+        role: "Member",
+        image: "2024/Designers/pujitha.jpg",
+      },
+    ],
+  },
+  {
+    section:"Editorial and Documentation Team",
+members:[
+  {
+   name:"Reethika Sreeja",
+   role:"Director",
+   image:"2024/Editorial/sreeja.jpg",
+  },
+  {
+    name:"Vaishnavi",
+    role:"Co-Director",
+    image:"2024/Editorial/vaishnavi.jpg",
+  },
+  {
+    name:"Deepika Shalini",
+    role:"Member",
+    image:"2024/Editorial/Deepika.jpg",
+  },
+  {
+    name:"Meka Bhavya Sree",
+    role:"Member",
+    image:"2024/Editorial/bhavya.jpg",
+      },  
+
+]
+  },
+  {
+    section:"Finance and Sponsorship Team",
+    members:[
+      {
+        name: "G sai Harshith",
+        role: "Director",
+        image: "2024/Sponsorship/harshith.png",
+      },
+      {
+        name: "Jaswanth",
+        role: "Co-Director",
+        image: "2024/Sponsorship/jaswanth.jpg",
+      },
+    ]
+  },
+  {
+section:"Logistics Team",
+members:[
+  {
+    name: "K Rohith Reddy",
+    role: "Director",
+    image: "2024/Logistics/rohith.jpg",
+
+  },
+  {
+    name: "C Sainadh Reddy",
+    role: "Co-Director",
+    image: "2024/Logistics/sainadh.jpg",
+  },
+  {
+    name:"Rajavardhan Reddy",
+    role:"Member",
+    image:"2024/Logistics/Raju.jpg",
+  },
+  {
+    name:"Deepak",
+    role:"Member",
+    image:"2024/Logistics/deepak11.jpg",
+  }
+]
+  },
+  {
+    section:"Public Relations Team",
+    members:[
+      {
+        name: "M Sumana Sree",
+        role: "Director",
+        image: "2024/PublicRelations/Sumana.jpeg",
+      },
+      {
+        name: "G R S Spandana",
+        role: "Member",
+        image: "2024/PublicRelations/spandana.jpg",
+      },
+      {
+        name: "R Yashika Reddy",
+        role: "Member",
+        image: "2024/PublicRelations/Yashika.jpg",
+      },
+      {
+        name: "G R Sri Nihitha",
+        role: "Member",
+        image: "2024/PublicRelations/Nihitha.png",
+      },
+      {
+        name: "L Akshitha",
+        role: "Member",
+        image: "2024/PublicRelations/Akshitha.jpg",
+
+      },
+    ] 
+  },
+  {
+    section:"Publicity and Marketing Team",
+    members:[
+      {
+        name: "A Supraja",
+        role: "Director",
+        image: "2024/PandmTeam/Supraja.jpg",
+      },
+      {
+        name: "M Gayathri",
+        role: "Member",
+        image: "2024/PandmTeam/gayathri.jpg",
+      },
+      {
+        name: "Mythreyi Mahanandigiri",
+        role: "Member",
+        image: "2024/PandmTeam/mythri.jpg",
+      },
+      {
+        name: "Katika Sailu",
+        role: "Member",
+        image: "2024/PandmTeam/sailu.jpg",
+      },
+      {
+        name: "M S Faiza Anjum",
+        role: "Member",
+        image: "2024/PandmTeam/faiza.jpg",
+      },
+    ]
+  },
+  {
+    section: "Speaker and Guest Care Team",
+    members:[
+      {
+        name:"M Neha",
+        role: "Director",
+        image: "2024/SG/Neha_.jpg",
+      },
+      {
+        name: "Narla Haritha",
+        role: "Co-Director",
+        image: "2024/SG/haritha.jpg",
+      },
+      {
+
+        name: "Bhuma Mounika",
+        role: "Co-Director",
+        image: "2024/SG/mounika.jpg",
+      },
+    ]
+  },
+  {
+    section:"Technical Team",
+    members:[
+      {
+        name:"Sanjay Raj",
+        role :"Director",
+        image:"2024/TechnicalTeam/sanjay.jpg",
+
+      },
+      {
+        name:"Avinash Golla",
+        role :"Co-Director",
+        image:"2024/TechnicalTeam/Avinash.jpg"
+      },
+      {
+        name:"Y Hari Priya",
+        role :"Member",
+        image:"2024/TechnicalTeam/HariPriya.jpg"
+      },
+      {
+        name:"Qazi Mosa",
+        role :"Member",
+        image:"2024/TechnicalTeam/Mosa.png"
+      },
+    ]
+  },
+];
+const teamData3 = [
+  {
+    section: "Organizers",
+    members: [
+      {
+        name: "Bandaru Sasira",
+        role: "Organiser",
+        image: "2023/Organisers/sasira.jpg",
+      },
+      {
+        name: "Pathapadu Mani Aryani",
+        role: "Co-Organizer",
+        image: "2023/Organisers/mani aryani.jpg",
+      },
+      {
+        name: "G. Naga Sowgandhi",
+        role: "Executive Director",
+        image: "2023/Organisers/sowgandhi.jpg",
+      },
+    ]
+  },
+  {
+    section: "Design Team",
+    members: [
+      {
+        name: "Madri Prajwala",
+        role: "Director",
+        image: "2023/Desiginers/Prajwala.jpg",
+      },
+      {
+        name: "Kuruva Uday Chandra",
+        role: "Director",
+        image: "2023/Desiginers/uday.jpeg",
+      },
+      {
+        name: "MD.Sami Rahaman",
+        role: "Co-Director",
+        image: "2023/Desiginers/SAMI.jpg",
+      },
+      {
+        name:"Shaik Mohammad Adil",
+        role:"Co-Director",
+        image: "2023/Desiginers/mohamad.jpg",
+      }
+    ],
+  },
+  {
+    section: "Editorial Team",
+    members: [
+      {
+        name: "Somala Poornima Saranya",
+        role: "Director",
+        image: "2023/Editorial/saranya.jpeg",
+      },
+      {
+        name: "Chukka Hema",
+        role: "Director",
+        image: "2023/Editorial/hema.jpg",
+      },
+      {
+        name: "Manta Sai Vaishnavi",
+        role: "Member",
+        image: "2023/Editorial/vaishnavi.jpg",
+      },
+      {
+        name:"Asthanaditta supraja",
+        role:"Member",
+        image: "2023/Editorial/SUPRAJA.jpg",
+      }
+    ],
+  },
+  {
+    section: "Finance and Sponsorship Team",
+    members: [
+      {
+        name: "C V Harshavardhan",
+        role: "Director",
+        image: "2023/Sponsorship/Harsha.jpg",
+      },
+      {
+        name: "G Lalith Aditya",
+        role: "Co-Director",
+        image: "2024/Organisers/Aditya.jpg",
+      },
+      {
+        name: "Abinavya Mudimela",
+        role: "Member",
+        image: "2023/Sponsorship/Abinavya.jpg",
+      },
+    ],
+  },
+  {
+    section: "Logistics Team",
+    members: [
+      {
+        name: "Midde Gandhi Prakash",
+        role: "Director",
+        image: "2023/Logistics/gandhi.jpg",
+      },
+      {
+        name: "S.Jananada Bhushanam",
+        role: "Member",
+        image: "2023/Logistics/Bhushanam.jpg",
+      },
+      {
+        name: "Katakam Niharika",
+        role: "Member",
+        image: "2023/Logistics/Niharika.jpg",
+      },
+    ],
+  },
+  {
+    section: "Public Relational Team",
+    members: [
+      {
+        name: "D.jahnavi",
+        role: "Director",
+        image: "2023/publicRelations/jahnavi_.jpg",
+      },
+      {
+        name: "Shreya",
+        role: "Director",
+        image: "2023/publicRelations/Shreya.jpg",
+      },
+      {
+        name: "Shaik mohammed khateeb",
+        role: "Member",
+        image: "2023/publicRelations/mohammad.jpg",
+      },
+    ],
+  },
+  {
+    section: "Speakers and Guest Team ",
+    members: [
+      {
+        name: "Kota Amog",
+        role: "Director",
+        image: "2023/SG/kota.jpeg",
+      },
+      {
+        name: "Sudhireddy sai Bhavana",
+        role: "Director",
+        image: "2023/SG/S.Sai Bhavana.jpg",
+      },
+      {
+        name: "charitha Gangireddy",
+        role: "Co-Director",
+        image: "2023/SG/Chaitra.jpg",
+      },
+      {
+        name: "K. Lakshmi Sarojini",
+        role: "Co-Director",
+        image: "2023/SG/Lakshmi Sarojini.jpg",
+      },
+    ],
+  },
+  {
+    section: "Technical Team",
+    members: [
+      {
+        name: "Gajula Nomika",
+        role: "Director",
+        image: "2023/TechnicalTeam/Nomika.jpeg",
+      },
+      {
+        name: "Ediga Subash Goud",
+        role: "Co-Director",
+        image: "2023/TechnicalTeam/Subash goud.jpg",
+      },
+      {
+        name: "T Chethana Choudary",
+        role: "Co-Director",
+        image: "2023/TechnicalTeam/Chethana.jpg",
+      },
+      {
+        name: "Medam Neha",
+        role: "Co-Director",
+        image: "2023/TechnicalTeam/Medam Neha_.jpg",
+      },
+    ],
+  },
+];
+
+
+    const container = document.getElementById("team-sections");
+    const buttons = document.querySelectorAll(".year-btn");
+
+    function renderTeams(teamData) {
+      container.innerHTML = "";
+      teamData.forEach(section => {
+        const sectionDiv = document.createElement("div");
+        sectionDiv.classList.add("team-section", "mb-5");
+
+        const heading = document.createElement("h2");
+        heading.classList.add("text-center", "mb-4", "role-heading");
+        heading.textContent = section.section;
+        sectionDiv.appendChild(heading);
+
+        const grid = document.createElement("div");
+        grid.classList.add("team-grid");
+
+        section.members.forEach(member => {
+          const memberDiv = document.createElement("div");
+          memberDiv.classList.add("team-member");
+          memberDiv.innerHTML = `
+            <img src="${member.image}" alt="${member.name}" />
+            <div class="team-overlay">
+              <h3>${member.name}</h3>
+              <p>${member.role}</p>
+            </div>`;
+          grid.appendChild(memberDiv);
+        });
+
+        sectionDiv.appendChild(grid);
+        container.appendChild(sectionDiv);
+      });
+    }
+
+    renderTeams(teamData1);
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const year = btn.dataset.year;
+        if (year === "2025") renderTeams(teamData1);
+        else if (year === "2024") renderTeams(teamData2);
+        else if (year === "2023") renderTeams(teamData3);
+      });
+    });
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

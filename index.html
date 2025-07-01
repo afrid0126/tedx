@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEDxGPREC</title>
+  <link rel="stylesheet" href="home.css" />
+  <script src="home.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet"/>
+
+</head>
+<body>
+<div id="video-preloader">
+        <video id="loaderVideo" preload="auto" muted playsinline>
+            <source src="opening_video.mp4" type="video/mp4">
+           <!--<source src="path/to/your-loader-video.webm" type="video/webm"> --> 
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+      <svg style="position: absolute; width: 0; height: 0;">
+    <defs>
+      <radialGradient id="moonGradient" cx="30%" cy="30%" r="30%">
+        <stop offset="0%" stop-color="#ff002b" stop-opacity="0.3" />
+        <stop offset="100%" stop-color="#ff002b" stop-opacity="1" />
+      </radialGradient>
+    </defs>
+  </svg>
+  
+  <!-- Navbar -->
+  <div class="nav-container">
+    <img src="media/photos/logo-white.png" alt="TEDxGPREC Logo" class="logo" />
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+<section class="hero-section">
+  <div class="theme-container">
+  <div class="theme-img">
+    <img src="media/photos/DreamSpace_font.png" alt="Theme Logo">
+    <p class="theme-description">
+Dreamspace is an endless realm of ideas, imagination, and possibilities that shape our future. It's a space to break free from the ordinary, diving deep into creativity to explore bold ideas and envision a future fueled by innovation and fresh perspectives. This theme celebrates the power of dreams to ignite change, unlock new pathways, and inspire us to see the world through a captivating new lens.    </p>
+  </div>
+  <div class="theme-design">
+    <img src="media/photos/badge1.png" alt="badge">
+
+  </div>
+</div>
+
+  <h1 class="countdown-heading">Event Countdown</h1>
+
+  <div class="countdown-container">
+  <div class="moon-block">
+  <div class="circle">
+    <svg width="120" height="120">
+  <circle cx="60" cy="60" r="60" class="progress" id="dayProgress" />
+</svg>
+    <div class="count">
+      <h2 id="dayVal">00</h2>
+      <small>Days</small>
+    </div>
+  </div>
+</div>
+<div class="moon-block">
+  <div class="circle">
+    <svg width="120" height="120">
+  <circle cx="60" cy="60" r="60" class="progress" id="hourProgress" />
+</svg>
+    <div class="count">
+      <h2 id="hourVal">00</h2>
+      <small>Hours</small>
+    </div>
+  </div>
+</div>
+
+<div class="moon-block">
+  <div class="circle">
+    <svg width="120" height="120">
+  <circle cx="60" cy="60" r="60" class="progress" id="minuteProgress" />
+</svg>
+    <div class="count">
+      <h2 id="minuteVal">00</h2>
+      <small>Minutes</small>
+    </div>
+  </div>
+</div>
+
+ <div class="moon-block">
+  <div class="circle">
+    <svg width="120" height="120">
+  <circle cx="60" cy="60" r="60" class="progress" id="secondProgress" />
+</svg>
+    <div class="count">
+      <h2 id="secondVal">00</h2>
+      <small>Seconds</small>
+    </div>
+  </div>
+</div>
+
+
+</section>
+
+<section class="timeline-section">
+  <h1 class="timeline-title">Flow of Event</h1>
+    <div class="scroll-arrows">
+  <button class="scroll-btn left">&#10094;</button>
+  <button class="scroll-btn right">&#10095;</button>
+</div>
+  <div class="timeline-container">
+
+
+    <div class="timeline">
+
+      <div class="timeline-item" data-title="Opening" data-desc="10:00 AM – Kick-off ceremony with lamp lighting and introductions.">
+        <div class="timeline-circle"><img src="media/photos/inagural.JPG" alt="Opening" loading="lazy"></div>
+        <p class="label">Opening</p>
+      </div>
+
+      <div class="timeline-item" data-title="Speaker 1" data-desc="10:20 AM – Our first speaker sets the tone with an inspiring talk.">
+        <div class="timeline-circle"><img src="media/photos/speaker1.JPG" alt="Speaker 1" loading="lazy"></div>
+        <p class="label">Speaker 1</p>
+      </div>
+
+      <div class="timeline-item" data-title="Performance" data-desc="10:50 AM – First cultural performance to energize the audience.">
+        <div class="timeline-circle"><img src="media/photos/peformance1.JPG" alt="Performance 1" loading="lazy"></div>
+        <p class="label">Performance</p>
+      </div>
+
+      <div class="timeline-item" data-title="Speaker 2" data-desc="11:10 AM – Talk by our second speaker.">
+        <div class="timeline-circle"><img src="media/photos/speaker2.JPG" alt="Speaker 2" loading="lazy"></div>
+        <p class="label">Speaker 2</p>
+      </div>
+
+      <div class="timeline-item" data-title="Break" data-desc="11:40 AM – Short break and refreshments.">
+        <div class="timeline-circle"><img src="media/photos/break.jpeg" alt="Break 1" loading="lazy"></div>
+        <p class="label">Break</p>
+      </div>
+
+      <div class="timeline-item" data-title="Performance" data-desc="12:00 PM – Second cultural performance.">
+        <div class="timeline-circle"><img src="media/photos/performance2.JPG" alt="Performance 2" loading="lazy"></div>
+        <p class="label">Performance 2</p>
+      </div>
+
+      <div class="timeline-item" data-title="Speaker 3" data-desc="12:20 PM – Talk by our third speaker.">
+        <div class="timeline-circle"><img src="media/photos/speaker3.JPG" alt="Speaker 3" loading="lazy"></div>
+        <p class="label">Speaker 3</p>
+      </div>
+
+      <div class="timeline-item" data-title="Performance" data-desc="12:50 PM – Third cultural performance.">
+        <div class="timeline-circle"><img src="media/photos/performance3.JPG" alt="Performance 3" loading="lazy"></div>
+        <p class="label">Performance 3</p>
+      </div>
+
+      <div class="timeline-item" data-title="Break" data-desc="1:10 PM – Lunch Break.">
+        <div class="timeline-circle"><img src="media/photos/break.jpeg" alt="Break 2" loading="lazy"></div>
+        <p class="label">Break 2</p>
+      </div>
+
+      <div class="timeline-item" data-title="Speaker 4" data-desc="2:10 PM – Talk by our fourth speaker.">
+        <div class="timeline-circle"><img src="media/photos/speaker4.JPG" alt="Speaker 4" loading="lazy"></div>
+        <p class="label">Speaker 4</p>
+      </div>
+
+      <div class="timeline-item" data-title="Performance" data-desc="2:40 PM – Fourth cultural performance.">
+        <div class="timeline-circle"><img src="media/photos/peformance4.JPG" alt="Performance 4" loading="lazy"></div>
+        <p class="label">Performance 4</p>
+      </div>
+
+      <div class="timeline-item" data-title="Speaker 5" data-desc="3:00 PM – Talk by our fifth speaker.">
+        <div class="timeline-circle"><img src="media/photos/speaker5.JPG" alt="Speaker 5" loading="lazy"></div>
+        <p class="label">Speaker 5</p>
+      </div>
+
+      <div class="timeline-item" data-title="Activity" data-desc="3:30 PM – Interactive audience activity.">
+        <div class="timeline-circle"><img src="media/photos/break.jpeg" alt="Activity" loading="lazy"></div>
+        <p class="label">Activity</p>
+      </div>
+
+      <div class="timeline-item" data-title="Panel Discussion" data-desc="4:00 PM – A thought-provoking discussion with our speakers.">
+        <div class="timeline-circle"><img src="media/photos/paneldiscussion.JPG" alt="Panel Discussion" loading="lazy"></div>
+        <p class="label">Panel Discussion</p>
+      </div>
+
+      <div class="timeline-item" data-title="Performance" data-desc="4:40 PM – Fifth cultural performance.">
+        <div class="timeline-circle"><img src="media/photos/performance5.JPG" alt="Performance 5" loading="lazy"></div>
+        <p class="label">Performance 5</p>
+      </div>
+
+      <div class="timeline-item" data-title="Closing Ceremony" data-desc="5:00 PM – Vote of thanks and closing performance.">
+        <div class="timeline-circle"><img src="media/photos/performance6.JPG" alt="Closing" loading="lazy"></div>
+        <p class="label">Performance 6</p>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="popup-overlay" id="popupOverlay"></div>
+
+
+  <!-- Popup Card -->
+  <div class="popup-card" id="popupCard">
+    <div class="popup-content">
+      <span class="popup-close" id="popupClose">&times;</span>
+      <h3 id="popupTitle"></h3>
+      <p id="popupDesc"></p>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Fullscreen Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+
+      <!-- Left: Nav Links -->
+      <div class="overlay-left">
+        <ul class="nav-links">
+          <li style="--i: 1"><a href="index.html">Home</a></li>
+          <li style="--i: 2"><a href="about.html">About</a></li>
+          <li style="--i: 3"><a href="events.html">Events</a></li>
+          <li style="--i: 4"><a href="performers.html">Performers</a></li>
+          <li style="--i: 5"><a href="team.html">Team</a></li>
+          <li style="--i: 6"><a href="sponsors.html">Sponsors</a></li>
+          <li style="--i: 7"><a href="contact.html">Contact</a></li>
+          <li style="--i: 8"><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+
+      <!-- Right: TEDxGPREC Badge -->
+      <!-- Right: TEDxGPREC Badge + Tagline -->
+<div class="overlay-right">
+  <div class="badge-wrapper">
+    <img src="media/photos/badge1.png" alt="TEDxGPREC Badge" class="overlay-badge" />
+    <p class="badge-tagline">IDEAS CHANGE EVERYTHING</p>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <!-- Optional: Home Page Hero (can customize) -->
+  <main style="padding-top: 100px; text-align: center;">
+    
+  </main>
+
+ 
+
+
+</body>
+</html>
