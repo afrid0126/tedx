@@ -684,7 +684,7 @@ circle.progress {
 }
 
 .overlay-left a {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: white;
   text-decoration: none;
   position: relative;
@@ -802,7 +802,7 @@ circle.progress {
   }
 
   .overlay-left a {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .overlay-badge {

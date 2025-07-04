@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #000;
+  color: white;
+}
+
+.speakers-section h1 {
+  color: red;
+  margin-bottom: 30px;
+}
+
+.year-btn {
+  background-color: transparent;
+      border: 2px solid #ff1a1a;
+      color: #ff1a1a;
+      font-weight: 600;
+      padding: 8px 20px;
+      margin: 0 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 18px;
+}
+
+.year-btn.active,
+    .year-btn:hover {
+      background-color: #ff1a1a;
+      color: black;
+      border-color: #ff1a1a;
+    }
+.speaker-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 30px;
+  justify-content: center;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+.speaker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Spacer between rows */
+.row-break {
+  flex-basis: 100%;
+  height: 60px;
+}
+
+/* Card */
+.flip-card {
+  width: 280px;
+  height: 460px;
+  perspective: 1000px;
+  transition: transform 0.3s;
+}
+
+.flip-card:hover {
+  transform: translateY(-6px);
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg) scale(1.02);
+}
+
+/* Front and Back */
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 20px;
+  border: 3px solid #ff1a1a;
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.6);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Image Style */
+/* Image Style */
+.flip-front img {
+  width: 100%;
+  height: 300px; /* or adjust height as needed */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+
+
+/* Fix specific image if head is cut */
+.fix-pnr {
+  object-position: top;
+}
+.fix-ap {
+  object-position: top;
+}
+
+/* Text below image */
+.flip-front h2 {
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  margin: 10px 0 5px;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  text-align: center;
+  line-height: 1.2;
+}
+
+
+.flip-front strong {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+/* Flip Back */
+.flip-back {
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+
+.flip-back p {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 220px;
+  margin-bottom: 20px;
+}
+
+/* Social Icons */
+.socials {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.socials a img {
+  width: 22px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.2s;
+}
+
+.socials a:hover img {
+  transform: scale(1.2);
+}

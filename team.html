@@ -134,7 +134,7 @@
     .overlay-left li:nth-child(8) { animation-delay: 0.8s; }
 
     .overlay-left a {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: white;
       text-decoration: none;
       position: relative;
@@ -221,7 +221,7 @@
       }
 
       .overlay-left a {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
       }
 
       .overlay-badge {
@@ -367,14 +367,15 @@
     <div class="overlay-content">
       <div class="overlay-left">
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="performers.html">Performers</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="sponsors.html">Sponsors</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li style="--i: 1"><a href="index.html">Home</a></li>
+          <li style="--i: 2"><a href="about.html">About</a></li>
+          <li style="--i: 3"><a href="events.html">Events</a></li>
+          <li style="--i: 4"><a href="speakers.html">Speakers</a></li>
+          <li style="--i: 5"><a href="performers.html">Performers</a></li>
+          <li style="--i: 6"><a href="team.html">Team</a></li>
+          <li style="--i: 7"><a href="sponsors.html">Sponsors</a></li>
+          <li style="--i: 8"><a href="contact.html">Contact</a></li>
+          <li style="--i: 9"><a href="gallery.html">Gallery</a></li>
         </ul>
       </div>
       <div class="overlay-right">
@@ -407,7 +408,233 @@
       });
     });
 
-     const teamData1=[];
+     const teamData1=[
+       {
+    section: "Organizers",
+    members: [
+      {
+        name: "M S Faiza Anjum",
+        role: "Organiser",
+        image: "2025/Orgs/faiza/1000144437.heic",
+      },
+      {
+        name: "M Gayathri",
+        role: "Co-Organizer",
+        image: "2025/Orgs/IMG-20250106-WA0635.jpg",
+      },
+      {
+        name: "G Jaswanth Sainath Reddy",
+        role: "Executive Director",
+        image: "2024/Sponsorship/jaswanth.jpg",
+      },
+    ],
+  },
+  {
+    section: "Design Team",
+    members: [
+      {
+        name: "N Jagadeesh",
+        role: "Director",
+        image: "2025/Design team/Jagadeesh.jpeg",
+      },
+      {
+        name: "T Veera Sai Lakshmi",
+        role: "Co-Director",
+        image: "2025/Design team/sai.jpg",
+      },
+      {
+        name: " Shaik Mohammad Saaqib",
+        role: "Member",
+        image: "2025/Design team/Saaqib.jpg",
+      },
+    ],
+  },
+  {
+    section:"Editorial and Documentation Team",
+members:[
+  {
+   name:"D Vedhitha",
+   role:"Director",
+   image:"2024/Editorial/sreeja.jpg",
+  },
+  {
+    name:"N Satya Priya",
+    role:"Co-Director",
+    image:"2025/Editorial and Documentation team/pic1.jpeg",
+  },
+  {
+    name:"M Vagdevi",
+    role:"Member",
+    image:"2025/Editorial and Documentation team/IMG_20250308_213343.jpg",
+  },
+ 
+]
+  },
+  {
+    section:"Finance and Sponsorship Team",
+    members:[
+      {
+        name: "P Harsha Vardhan",
+        role: "Director",
+        image: "2025/Finance and Sponsorship team/Harsha.jpg",
+      },
+      {
+        name: "yeshwanth",
+        role: "Co-Director",
+        image: "2025/Finance and Sponsorship team/IMG_20250508_124235.jpg",
+      },
+      {
+        name: "A Sai Aswitha",
+        role: "Co-Director",
+        image: "",
+      },
+    ]
+  },
+  {
+section:"Logistics Team",
+members:[
+  {
+    name: "S.Lashmi Deepak",
+    role: "Director",
+    image: "2025/Logistics team/IMG-20250309-WA0001.jpg",
+
+  },
+  {
+    name: "Ambati Pranay",
+    role: "Co-Director",
+    image: "2024/Logistics/sainadh.jpg",
+  },
+  {
+    name:"K Sai Pranitha",
+    role:"Member",
+    image:"2025/Logistics team/20250507_182949~3.jpg",
+  },
+  {
+    name:"S Mani kanta",
+    role:"Member",
+    image:"2025/Logistics team/1750932790608.jpg",
+  }
+]
+  },
+  {
+    section:"Public Relations Team",
+    members:[
+      {
+        name: "R Yashika Reddy",
+        role: "Director",
+        image: "2025/Public Relations team/yashika/3F0A7010.JPG",
+      },
+      {
+        name: "L Akshitha",
+        role: "Member",
+        image: "2025/Public Relations team/tedx.jpeg",
+      },
+      {
+        name: "A Likitha",
+        role: "Member",
+        image: "2025/Public Relations team/IMG-20250506-WA0016.jpg",
+      },
+      {
+        name: "J Sathvika",
+        role: "Member",
+        image: "2025/Public Relations team/20250417_165733.jpg",
+      },
+      {
+        name: "P Keerthi",
+        role: "Member",
+        image: "2025/Public Relations team/IMG-20250406-WA0067.jpg",
+
+      },
+    ] 
+  },
+  {
+    section:"Publicity and Marketing Team",
+    members:[
+      {
+        name: "M Mythreyi",
+        role: "Director",
+        image: "2025/Publicity and Marketing team/IMG_20241215_115513.jpg",
+      },
+      {
+        name: "M Nayana",
+        role: "Member",
+        image: "2025/Publicity and Marketing team/IMG_20241224_130244.jpg",
+      },
+      {
+        name: "N Likita",
+        role: "Member",
+        image: "2025/Publicity and Marketing team/IMG_20240505_104921.jpg",
+      },
+      {
+        name: "P Sujitha",
+        role: "Member",
+        image: "2025/Publicity and Marketing team/IMG-20250406-WA0018(1).jpg",
+      },
+    ]
+  },
+  {
+    section: "Speaker and Guest Care Team",
+    members:[
+      {
+        name:"M Yashaswini",
+        role: "Member",
+        image: "2025/Speakers and Guest Care/IMG_20250308_195607.jpg",
+      },
+      {
+        name: "G Shivani",
+        role: "Member",
+        image: "2025/Speakers and Guest Care/IMG_20250308_194516.jpg",
+      },
+      {
+
+        name: "Raghasree Kosigi",
+        role: "Co-Director",
+        image: "2025/Speakers and Guest Care/IMG-20250309-WA0001.jpg",
+      },
+    ]
+  },
+  {
+    section:"Technical Team",
+    members:[
+      {
+        name:"N Ramya Sree",
+        role :"Director",
+        image:"2025/Technical team/IMG_20250222_174759.jpg",
+
+      },
+      {
+        name:"K Afrid",
+        role :"Co-Director",
+        image:"2025/Technical team/IMG_1978.JPG"
+      },
+    ]
+  },
+  {
+    section:"Video and Production Team",
+   members: [
+      {
+        name:"G Sai Harshith",
+        role :"Co-Director",
+        image:"2024/TechnicalTeam/Avinash.jpg"
+      },
+      {
+        name:"Y Venkata Surendra",
+        role :"Co-Director",
+        image:"2024/TechnicalTeam/Avinash.jpg"
+      },
+      {
+        name:"E Harsha Vardhan Goud",
+        role :"Co-Director",
+        image:"2025/Video and Production Team/20250526_115115.jpg"
+      },
+      {
+        name:"Shaik Naseeha Mashrath",
+        role :"Co-Director",
+        image:"2025/Video and Production Team/Naseeha .jpg"
+      },
+    ]
+  },
+     ];
 const teamData2 = [
   {
     section: "Organizers",
